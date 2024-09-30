@@ -9,7 +9,7 @@
  * Plugin Name:       Spam Protect for Contact Form 7
  * Plugin URI:        https://nysoftwarelab.com/spam-protect-for-contact-form7/
  * Description:       Spam Protect for Contact Form 7
- * Version:           1.2.4
+ * Version:           1.2.5
  * Author:            New York Software Lab
  * Author URI:        https://nysoftwarelab.com
  * License:           GPL-2.0+
@@ -23,7 +23,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'SPCF7_VERSION', '1.2.4' );
+define( 'SPCF7_VERSION', '1.2.5' );
 
 /**
  * The code that runs during plugin activation.

@@ -79,6 +79,9 @@ class Spam_Protect_for_Contact_Form7_Admin {
         $wpcf7_block_log_filename = trim(get_post_meta($post_id, "_wpcf7_block_log_filename", true));
         $wpcf7_block_email_error_msg = get_post_meta($post_id, "_wpcf7_block_email_error_msg", true);
 
+        $log_file_size = 0;
+        $can_send_request = false;
+
         if ($wpcf7_block_log_filename != "") { $log_file_size = filesize("../wp-content/".$wpcf7_block_log_filename); }else{ $log_file_size = filesize("../wp-content/spcf_spam_block.log"); }
         $log_file_size_str = 0;
         if ($log_file_size > 0 && $log_file_size < 1024000){
@@ -87,7 +90,9 @@ class Spam_Protect_for_Contact_Form7_Admin {
         if ($log_file_size >= 1024000){
             $log_file_size_str = round( ($log_file_size /1024)/1024, 2)." MB";
         }
-
+        if ($log_file_size >= 2097152){
+            $can_send_request = true;
+        }
         $domain = home_url();
 
         // Default error message
@@ -213,7 +218,12 @@ class Spam_Protect_for_Contact_Form7_Admin {
                     </div>
                     <div class="block-report-log block-boxed block-boxed-second text-center">
                         <div class="block-boxed-button-header"><h4 class="blocker-7-setting third">Allow us to analyze your log file and provide you with a complimentary report! Please ensure that your log file size exceeds 500kb and that it is accessible via the web.</h4></div>
-                        <p class=""><a onclick="spcf_open_request_form();return false;" class="button-primary" name="wpcf7_block_analyze">Yes please</a></p>
+                        <?php 
+                            if ($can_send_request){?>
+                                <p class=""><a onclick="spcf_open_request_form();return false;" class="button-primary" name="wpcf7_block_analyze">Yes please</a></p><?php
+                            }else{?>
+                                <p class=""><div>Log file is too small</div></p><?php
+                            }?>
                     </div>
                 </div>
             </fieldset>
