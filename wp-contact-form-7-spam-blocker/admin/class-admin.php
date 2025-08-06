@@ -93,8 +93,7 @@ class Spam_Protect_for_Contact_Form7_Admin {
         if ($log_file_size >= 2097152){
             $can_send_request = true;
         }
-        $domain = home_url();
-
+        
         // Default error message
         if (empty($wpcf7_block_email_error_msg)) {
             $wpcf7_block_email_error_msg = 'We do not accept spam emails, ADs and other type of unwanted info. If this is a false block, please contact us with a different method.';
@@ -220,22 +219,13 @@ class Spam_Protect_for_Contact_Form7_Admin {
                         <div class="block-boxed-button-header"><h4 class="blocker-7-setting third">Allow us to analyze your log file and provide you with a complimentary report! Please ensure that your log file size exceeds 500kb and that it is accessible via the web.</h4></div>
                         <?php 
                             if ($can_send_request){?>
-                                <p class=""><a onclick="spcf_open_request_form();return false;" class="button-primary" name="wpcf7_block_analyze">Yes please</a></p><?php
+                                <p class="" id="wpcf7_block_analyze_btn"></p><?php
                             }else{?>
                                 <p class=""><div>Log file is too small</div></p><?php
                             }?>
                     </div>
                 </div>
             </fieldset>
-            <script>
-                var wpcf7_block_log_domain = "<?php echo $domain; ?>";
-                var wpcf7_block_log_filename = "<?php echo esc_html(trim($wpcf7_block_log_filename)); ?>";
-                if (wpcf7_block_log_filename==""){
-                    wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/spcf_spam_block.log";
-                }else{
-                    wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/"+wpcf7_block_log_filename;
-                }
-            </script>
         </div>
         <?php
     }
@@ -320,5 +310,20 @@ class Spam_Protect_for_Contact_Form7_Admin {
      */
     public function spcf7_enqueue_scripts() {
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/spam-protect-for-contact-form7.js', array('jquery'), $this->version, false);
+        
+        $domain = home_url();
+        $post_id = sanitize_text_field($_GET['post']);
+        $wpcf7_block_log_filename_script = trim(get_post_meta($post_id, "_wpcf7_block_log_filename", true));
+
+        echo '
+        <script>
+            var wpcf7_block_log_domain = "'.$domain.'";
+            var wpcf7_block_log_filename = "'.esc_html(trim($wpcf7_block_log_filename_script)).'";
+            if (wpcf7_block_log_filename==""){
+                wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/spcf_spam_block.log";
+            }else{
+                wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/"+wpcf7_block_log_filename;
+            }
+        </script>';
     }
 }

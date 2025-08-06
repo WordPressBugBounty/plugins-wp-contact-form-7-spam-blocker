@@ -3,7 +3,7 @@ Contributors: nysl
 Tags: Contact Form 7 security, Form spam prevention, Website form protection, Anti-spam plugin, WordPress form security
 Requires at least: 5.2
 Tested up to: 6.8
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 Requires PHP: 5.2.4
 Donate link: support@nysoftwarelab.com
 License: GPLv2 or later
@@ -107,6 +107,11 @@ svn file structure fixes
 = 1.2.6 =
 Tested successfully with Wordpress 6.8
 
+= 1.2.7 =
+Minor fixes after CF7 Ver: 6.1 (latest major update)
+Tested successfully with Wordpress 6.8.2
+
+
 == A brief Markdown Example ==
 
 1. Manually email block.
@@ -162,3 +167,7 @@ svn file structure fixes
 
 = 1.2.6 =
 Tested successfully with Wordpress 6.8
+
+= 1.2.7 =
+Minor fixes after CF7 Ver: 6.1 (latest major update)
+Tested successfully with Wordpress 6.8.2
