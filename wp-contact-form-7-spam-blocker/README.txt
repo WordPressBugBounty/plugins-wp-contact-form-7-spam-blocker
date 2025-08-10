@@ -3,8 +3,8 @@ Contributors: nysl
 Tags: Contact Form 7 security, Form spam prevention, Website form protection, Anti-spam plugin, WordPress form security
 Requires at least: 5.2
 Tested up to: 6.8
-Stable tag: 1.2.7
-Requires PHP: 5.2.4
+Stable tag: 1.2.8
+Requires PHP: 5.4
 Donate link: support@nysoftwarelab.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -55,29 +55,32 @@ Each form has its own antispam settings and even a different log file if needed.
 
 == Changelog ==
 
-= 1.0.0 =
-Launched
+= 1.2.8 =
+Minor bug fix, php warning in JS function
+Readme file adjustments.
 
-= 1.0.10 =
-Fixed bug affecting the spaces in banned words list.
+= 1.2.7 =
+Minor fixes after CF7 Ver: 6.1 (latest major update)
+Tested successfully with Wordpress 6.8.2
 
-Added visitors IP address in log file.
+= 1.2.6 =
+Tested successfully with Wordpress 6.8
 
-= 1.1.5 =
-Added ability to set your own filename for log.
-Each Contact Form can have a different log file now.
-Updated texts and descriptions in admin UI.
+= 1.2.5 =
+svn file structure fixes
 
-= 1.1.6 =
-Tested successfully with 6.3
+= 1.2.4 =
+Tested successfully with Wordpress 6.6
 
-= 1.1.8 =
-Fixed typo in Log file.
-Improved spam text detection.
-Tested successfully with 6.4
+= 1.2.3 =
+Tested successfully with Wordpress 6.5
 
-= 1.1.9 =
-Fixed missing variable in Log file.
+= 1.2.2 =
+Fixed minor bug displaying false errors.
+Improved field descriptions.
+
+= 1.2.1 =
+Fixed bug, custom log file didn't clear.
 
 = 1.2.0 =
 New better UI
@@ -88,29 +91,29 @@ New feature to erase the logfile
 New feature to request an analysis of your log file from our company NYSL
 Improved spam text check.
 
-= 1.2.1 =
-Fixed bug, custom log file didn't clear.
+= 1.1.9 =
+Fixed missing variable in Log file.
 
-= 1.2.2 =
-Fixed minor bug displaying false errors.
-Improved field descriptions.
+= 1.1.8 =
+Fixed typo in Log file.
+Improved spam text detection.
+Tested successfully with 6.4
 
-= 1.2.3 =
-Tested successfully with Wordpress 6.5
+= 1.1.6 =
+Tested successfully with 6.3
 
-= 1.2.4 =
-Tested successfully with Wordpress 6.6
+= 1.1.5 =
+Added ability to set your own filename for log.
+Each Contact Form can have a different log file now.
+Updated texts and descriptions in admin UI.
 
-= 1.2.5 =
-svn file structure fixes
+= 1.0.10 =
+Fixed bug affecting the spaces in banned words list.
 
-= 1.2.6 =
-Tested successfully with Wordpress 6.8
+Added visitors IP address in log file.
 
-= 1.2.7 =
-Minor fixes after CF7 Ver: 6.1 (latest major update)
-Tested successfully with Wordpress 6.8.2
-
+= 1.0.0 =
+First version launched
 
 == A brief Markdown Example ==
 
@@ -124,21 +127,32 @@ Tested successfully with Wordpress 6.8.2
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-Launched with basic requirements
+= 1.2.8 =
+Minor bug fix, php warning in JS function
+Readme file adjustments.
 
-= 1.0.10 =
-Fixed bug affecting the spaces in banned words list.
+= 1.2.7 =
+Minor fixes after CF7 Ver: 6.1 (latest major update)
+Tested successfully with Wordpress 6.8.2
 
-Added visitors IP address in log file.
+= 1.2.6 =
+Tested successfully with Wordpress 6.8
 
-= 1.1.5 =
-Added ability to set your own filename for log.
-Each Contact Form can have a different log file now.
-Updated texts and descriptions in admin UI.
+= 1.2.5 =
+svn file structure fixes
 
-= 1.1.9 =
-Minor changes and compatibility tests
+= 1.2.4 =
+Tested successfully with Wordpress 6.6
+
+= 1.2.3 =
+Tested successfully with Wordpress 6.5
+
+= 1.2.2 =
+Fixed minor bug displaying false errors.
+Improved field descriptions.
+
+= 1.2.1 =
+Fixed bug, custom log file didn't clear.
 
 = 1.2.0 =
 New better UI
@@ -149,25 +163,25 @@ New feature to erase the logfile
 New feature to request an analysis of your log file from our company NYSL
 Improved spam text check.
 
-= 1.2.1 =
-Fixed bug, custom log file didn't clear.
+= 1.1.9 =
+Minor changes and compatibility tests
 
-= 1.2.2 =
-Fixed minor bug displaying false errors.
-Improved field descriptions.
+= 1.1.8 =
+Fixed typo in Log file.
+Improved spam text detection.
+Tested successfully with 6.4
 
-= 1.2.3 =
-Tested successfully with Wordpress 6.5
+= 1.1.6 =
+Tested successfully with 6.3
 
-= 1.2.4 =
-Tested successfully with Wordpress 6.6
+= 1.1.5 =
+Added ability to set your own filename for log.
+Each Contact Form can have a different log file now.
+Updated texts and descriptions in admin UI.
 
-= 1.2.5 =
-svn file structure fixes
+= 1.0.10 =
+Fixed bug affecting the spaces in banned words list.
+Added visitors IP address in log file.
 
-= 1.2.6 =
-Tested successfully with Wordpress 6.8
-
-= 1.2.7 =
-Minor fixes after CF7 Ver: 6.1 (latest major update)
-Tested successfully with Wordpress 6.8.2
+= 1.0.0 =
+Launched with basic requirements

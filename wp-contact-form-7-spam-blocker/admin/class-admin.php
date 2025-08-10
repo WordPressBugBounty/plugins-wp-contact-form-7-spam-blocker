@@ -309,21 +309,25 @@ class Spam_Protect_for_Contact_Form7_Admin {
      * Register the JavaScript for the admin area.
      */
     public function spcf7_enqueue_scripts() {
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/spam-protect-for-contact-form7.js', array('jquery'), $this->version, false);
-        
-        $domain = home_url();
-        $post_id = sanitize_text_field($_GET['post']);
-        $wpcf7_block_log_filename_script = trim(get_post_meta($post_id, "_wpcf7_block_log_filename", true));
+        if (isset($_GET['page']) && $_GET['page']="wpcf7"){
+            if (isset($_GET['post'])){
+                wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/spam-protect-for-contact-form7.js', array('jquery'), $this->version, false);
+                
+                $domain = home_url();
+                $post_id = sanitize_text_field($_GET['post']);
+                $wpcf7_block_log_filename_script = trim(get_post_meta($post_id, "_wpcf7_block_log_filename", true));
 
-        echo '
-        <script>
-            var wpcf7_block_log_domain = "'.$domain.'";
-            var wpcf7_block_log_filename = "'.esc_html(trim($wpcf7_block_log_filename_script)).'";
-            if (wpcf7_block_log_filename==""){
-                wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/spcf_spam_block.log";
-            }else{
-                wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/"+wpcf7_block_log_filename;
+                echo '
+                <script>
+                    var wpcf7_block_log_domain = "'.$domain.'";
+                    var wpcf7_block_log_filename = "'.esc_html(trim($wpcf7_block_log_filename_script)).'";
+                    if (wpcf7_block_log_filename==""){
+                        wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/spcf_spam_block.log";
+                    }else{
+                        wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/"+wpcf7_block_log_filename;
+                    }
+                </script>';
             }
-        </script>';
+        }
     }
 }
