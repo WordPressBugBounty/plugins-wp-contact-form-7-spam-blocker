@@ -216,13 +216,15 @@ class Spam_Protect_for_Contact_Form7_Admin {
                             class="button-primary" name="wpcf7_block_log_erase" value="Erase log"></p>
                     </div>
                     <div class="block-report-log block-boxed block-boxed-second text-center">
-                        <div class="block-boxed-button-header"><h4 class="blocker-7-setting third">Allow us to analyze your log file and provide you with a complimentary report! Please ensure that your log file size exceeds 500kb and that it is accessible via the web.</h4></div>
+                        <div class="block-boxed-button-header"><h4 class="blocker-7-setting third">Thanks for choosing Spam Protect for Contact Form 7 plugin</h4></div>
                         <?php 
+                        /*
                             if ($can_send_request){?>
                                 <p class="" id="wpcf7_block_analyze_btn"></p><?php
                             }else{?>
                                 <p class=""><div>Log file is too small</div></p><?php
-                            }?>
+                            }
+                        */?>
                     </div>
                 </div>
             </fieldset>
@@ -309,9 +311,12 @@ class Spam_Protect_for_Contact_Form7_Admin {
      * Register the JavaScript for the admin area.
      */
     public function spcf7_enqueue_scripts() {
+        
         if (isset($_GET['page']) && $_GET['page']="wpcf7"){
+            wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/spam-protect-for-contact-form7.js', array('jquery'), $this->version, false);
+            /*
             if (isset($_GET['post'])){
-                wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/spam-protect-for-contact-form7.js', array('jquery'), $this->version, false);
+                
                 
                 $domain = home_url();
                 $post_id = sanitize_text_field($_GET['post']);
@@ -328,6 +333,7 @@ class Spam_Protect_for_Contact_Form7_Admin {
                     }
                 </script>';
             }
+            */
         }
     }
 }

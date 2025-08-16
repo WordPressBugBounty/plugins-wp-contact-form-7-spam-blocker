@@ -3,7 +3,7 @@ Contributors: nysl
 Tags: Contact Form 7 security, Form spam prevention, Website form protection, Anti-spam plugin, WordPress form security
 Requires at least: 5.2
 Tested up to: 6.8
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 Requires PHP: 5.4
 Donate link: support@nysoftwarelab.com
 License: GPLv2 or later
@@ -55,8 +55,11 @@ Each form has its own antispam settings and even a different log file if needed.
 
 == Changelog ==
 
+= 1.2.9 =
+Unknown conflict with WooComerce, removed latest features from plugin temporary until further investigation. 
+
 = 1.2.8 =
-Minor bug fix, php warning in JS function
+Minor bug fix, php warning in enqueue_scripts function
 Readme file adjustments.
 
 = 1.2.7 =
@@ -127,8 +130,11 @@ First version launched
 
 == Upgrade Notice ==
 
+= 1.2.9 =
+Unknown conflict with WooComerce, removed latest features from plugin temporary until further investigation. 
+
 = 1.2.8 =
-Minor bug fix, php warning in JS function
+Minor bug fix, php warning in enqueue_scripts function
 Readme file adjustments.
 
 = 1.2.7 =

@@ -31,10 +31,12 @@
 
 })( jQuery );
 
+/*
 window.onload = function() {
     var btn = (jQuery)("#wpcf7_block_analyze_btn");
     btn.html(`<a onclick="spcf_open_request_form();return false;" class="button-primary" name="wpcf7_block_analyze">Yes please</a>`);
 };
+*/
 
 function spcf_open_request_form(){
     var d = (jQuery)("#spcf7_plugin_page");
