@@ -83,6 +83,8 @@ class Spam_Protect_for_Contact_Form7_Admin {
         $can_send_request = false;
 
         if ($wpcf7_block_log_filename != "") { $log_file_size = filesize("../wp-content/".$wpcf7_block_log_filename); }else{ $log_file_size = filesize("../wp-content/spcf_spam_block.log"); }
+        if (empty($wpcf7_block_log_filename)) { $wpcf7_block_log_filename = "spcf_spam_block.log"; }
+
         $log_file_size_str = 0;
         if ($log_file_size > 0 && $log_file_size < 1024000){
             $log_file_size_str = round($log_file_size /1024, 2)." KB";
@@ -184,8 +186,8 @@ class Spam_Protect_for_Contact_Form7_Admin {
                 <div class="block-error-msg">
                     <h3 class="blocker-7-setting second">Set your log file filename. <span><small>(optional)</small></span></h3>
                     <p><small class="blocker-7-setting-small">
-                        Please specify the filename you prefer for storing the log. For instance, 'spcf_spam_block.log' (recommended), 'mylog.txt,' or '[random-secret-name].html.' <br>
-                    You may leave this field blank to use the default value. Utilize this field to manage different log files for multiple contact forms across your site. <br>
+                    Please specify the filename you prefer for storing the log. For instance, 'spcf_spam_block.log' (recommended), 'myform.log,' or '[random-name].log', extension must always be (.log). <br>
+                    You may leave this field blank to use the default value 'spcf_spam_block.log'. You can utilize this field to manage different log files for multiple contact forms across your site. <br>
                     IMPORTANT: Ensure your server supports MIME file extensions for download or viewing, and ensure the file does not already exist or is being used by another plugin.
                     </small></p>
                     <input type="text" name="wpcf7_block_log_filename" id="wpcf7-block-log-filename-id" 
@@ -216,15 +218,16 @@ class Spam_Protect_for_Contact_Form7_Admin {
                             class="button-primary" name="wpcf7_block_log_erase" value="Erase log"></p>
                     </div>
                     <div class="block-report-log block-boxed block-boxed-second text-center">
-                        <div class="block-boxed-button-header"><h4 class="blocker-7-setting third">Thanks for choosing Spam Protect for Contact Form 7 plugin</h4></div>
+                        <div class="block-boxed-button-header"><h4 class="blocker-7-setting third">Thanks for choosing Spam Protect for Contact Form 7 plugin.</h4></div>
                         <?php 
-                        /*
+                            /*
                             if ($can_send_request){?>
                                 <p class="" id="wpcf7_block_analyze_btn"></p><?php
                             }else{?>
                                 <p class=""><div>Log file is too small</div></p><?php
                             }
-                        */?>
+                            */
+                        ?>
                     </div>
                 </div>
             </fieldset>
@@ -270,7 +273,17 @@ class Spam_Protect_for_Contact_Form7_Admin {
 
         // Log filename
         $wpcf7_block_log_filename = sanitize_text_field( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $_POST['wpcf7_block_log_filename'] ) );
-        update_post_meta($post_id, "_wpcf7_block_log_filename", trim($wpcf7_block_log_filename));
+        // Ensure filename is not empty and ends with .log
+        if (!empty($wpcf7_block_log_filename)) {
+            // Ensure filename ends with .log
+            if (pathinfo($wpcf7_block_log_filename, PATHINFO_EXTENSION) !== 'log') {
+                $wpcf7_block_log_filename .= '.log';
+            }
+        } else {
+            $wpcf7_block_log_filename = "spcf_spam_block.log";
+        }
+        
+        update_post_meta($post_id, "_wpcf7_block_log_filename", trim($wpcf7_block_log_filename));        
 
         //Erase Log
         $erase_log = sanitize_text_field($_POST['wpcf7_block_log_erase']);
@@ -285,19 +298,6 @@ class Spam_Protect_for_Contact_Form7_Admin {
                 fclose($log_handle);
             }
         }
-
-        //Send request
-        $file_value = sanitize_text_field($_POST['request-form-path']);
-        if (strlen(trim($file_value)) > 7){
-            
-            $email_value = sanitize_text_field($_POST['request-form-email']);
-            $recipient = base64_decode("c3BjZkBueXNvZnR3YXJlbGFiLmNvbQ==");
-
-            // Use Gmail to avoid potential spamming to company's servers
-            $rslt = wp_mail( $recipient, "analyze log file request", $email_value."\r\n".$file_value."\r\n", '', array() );
-
-            update_post_meta($post_id, "_wpcf7_request_log_analyze", $rslt);
-        }
     }
     
     /**
@@ -311,29 +311,6 @@ class Spam_Protect_for_Contact_Form7_Admin {
      * Register the JavaScript for the admin area.
      */
     public function spcf7_enqueue_scripts() {
-        
-        if (isset($_GET['page']) && $_GET['page']="wpcf7"){
-            wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/spam-protect-for-contact-form7.js', array('jquery'), $this->version, false);
-            /*
-            if (isset($_GET['post'])){
-                
-                
-                $domain = home_url();
-                $post_id = sanitize_text_field($_GET['post']);
-                $wpcf7_block_log_filename_script = trim(get_post_meta($post_id, "_wpcf7_block_log_filename", true));
-
-                echo '
-                <script>
-                    var wpcf7_block_log_domain = "'.$domain.'";
-                    var wpcf7_block_log_filename = "'.esc_html(trim($wpcf7_block_log_filename_script)).'";
-                    if (wpcf7_block_log_filename==""){
-                        wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/spcf_spam_block.log";
-                    }else{
-                        wpcf7_block_log_filename = wpcf7_block_log_domain+"/wp-content/"+wpcf7_block_log_filename;
-                    }
-                </script>';
-            }
-            */
-        }
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/spam-protect-for-contact-form7.js', array('jquery'), $this->version, false);
     }
 }
